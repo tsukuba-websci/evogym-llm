@@ -21,6 +21,7 @@ env:
 
 jobs:
   build_and_push:
+    name: Build and Push / Docker Build
     runs-on: ubuntu-latest
 
     steps:
