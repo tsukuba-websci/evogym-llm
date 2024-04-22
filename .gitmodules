@@ -1,0 +1,3 @@
+[submodule "submodule/POET-Evogym-LLM"]
+	path = submodule/POET-Evogym-LLM
+	url = https://github.com/tsukuba-websci/POET-Evogym-LLM
