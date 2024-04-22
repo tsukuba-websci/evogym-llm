@@ -5,12 +5,13 @@ RUN apt-get update && \
 	libglu1-mesa-dev libglew-dev cmake xauth xvfb gifsicle && \
 	rm -rf /var/lib/apt/lists/*
 
-RUN git clone --depth 1 https://github.com/tsukuba-websci/POET-Evogym-LLM /POET-LLM && \
-	cd /POET-LLM && \
+RUN git clone --depth 1 --recurse-submodules \
+	https://github.com/EvolutionGym/evogym.git /evogym
+
+COPY ./submodule/POET-Evogym-LLM /POET-LLM
+
+RUN cd /POET-LLM && \
 	pip install -r requirements.txt
 
-
-RUN git clone --depth 1 --recurse-submodules \
-	https://github.com/EvolutionGym/evogym.git /evogym && \
-	cd /evogym && \
+RUN cd /evogym && \
 	python setup.py install
