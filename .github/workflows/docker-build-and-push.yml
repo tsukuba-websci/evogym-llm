@@ -24,6 +24,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        submodules: true
 
     - name: authenticate with Google Cloud
       uses: google-github-actions/auth@v2
