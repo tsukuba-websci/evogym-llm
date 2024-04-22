@@ -15,7 +15,7 @@ permissions:
 
 env:
   REGION: asia-northeast1
-  REPO_NAME: container-registory
+  REPO_NAME: container-registry
   IMAGE_NAME: evogym-llm
   IMAGE_TAG: ${{ github.sha }}
 
@@ -37,7 +37,7 @@ jobs:
       uses: google-github-actions/setup-gcloud@v2
 
     - name: Auth Docker
-      run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+      run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
 
     - name: Build image
       run: docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:$IMAGE_TAG .
