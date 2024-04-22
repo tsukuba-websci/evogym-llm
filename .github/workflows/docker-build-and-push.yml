@@ -1,0 +1,44 @@
+name: Build and Push Docker image
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  REGION: asia-northeast1
+  REGISTRY_NAME: container-registry
+  IMAGE_NAME: evogym-llm
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  build_and_push:
+    name: Build and Push / Docker Build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: authenticate with Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        workload_identity_provider: "projects/${{ secrets.GCP_PROJECT_ID }}/locations/global/workloadIdentityPools/${{secrets.POOL_ID }}/providers/${{ secrets.PROVIDER_ID }}"
+        service_account: ${{ secrets.SERVICE_ACCOUNT_NAME }}
+
+    - name: Set up gcloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+
+    - name: Auth Docker
+      run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+
+    - name: Build image
+      run: docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_NAME }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:$IMAGE_TAG .
+
+    - name: Push image
+      run: docker push ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_NAME }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:$IMAGE_TAG
