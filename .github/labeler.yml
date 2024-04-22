@@ -1,0 +1,25 @@
+area/github-management:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**"
+
+area/documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "docs/*.md"
+          - "docs/*.txt"
+
+area/submodule:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "submodule/**"
+
+area/src:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "src/**"
+
+area/test:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "test/**"
