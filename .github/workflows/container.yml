@@ -15,7 +15,7 @@ permissions:
 
 env:
   REGION: asia-northeast1
-  REPO_NAME: container-registry
+  REPO_NAME: container-registory
   IMAGE_NAME: evogym-llm
   IMAGE_TAG: ${{ github.sha }}
 
