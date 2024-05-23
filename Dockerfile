@@ -8,10 +8,12 @@ RUN apt-get update && \
 RUN git clone --depth 1 --recurse-submodules \
 	https://github.com/EvolutionGym/evogym.git /evogym
 
-COPY ./submodule/POET-Evogym-LLM /POET-LLM
+COPY ./submodule/POET-Evogym-LLM/requirements.txt /POET-LLM/requirements.txt
 
 RUN cd /POET-LLM && \
 	pip install -r requirements.txt
+
+COPY ./submodule/POET-Evogym-LLM /POET-LLM
 
 RUN cd /evogym && \
 	python setup.py install
