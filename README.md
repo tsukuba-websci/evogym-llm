@@ -10,5 +10,5 @@ $ pwd
 
 $ docker build -t evogym-llm:local .
 
-$ docker run -it --rm evogym-llm:local
+$ docker run -it --rm evogym-llm:local /bin/bash
 ```
