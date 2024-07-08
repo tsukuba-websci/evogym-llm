@@ -5,8 +5,10 @@ RUN apt-get update && \
 	libglu1-mesa-dev libglew-dev cmake xauth xvfb gifsicle && \
 	rm -rf /var/lib/apt/lists/*
 
-RUN git clone --depth 1 --recurse-submodules \
-	https://github.com/EvolutionGym/evogym.git /evogym
+RUN git clone --recurse-submodules \
+	https://github.com/EvolutionGym/evogym.git /evogym && \
+	cd /evogym && \
+	git checkout 533b985
 
 COPY ./submodule/POET-Evogym-LLM/requirements.txt /POET-LLM/requirements.txt
 
